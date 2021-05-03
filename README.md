@@ -11,5 +11,6 @@ avancement semaine 1:
 Pour cette semaine on a creé des sites basiques en HTML et CSS.
 
 avencement semaine 2:
-Durant cette semaine on a essayé de mieux developper les codes html et css (style.css et index.html ) et entammer la partie Javascript
+Durant cette semaine on a essayé de mieux developper les codes html et css (style.css et index.html ) et entammer la partie Javascript.
+Aussi on a essayé de se connecter à un mock web service et tester la connexion et récupérer les données de serveur.
 

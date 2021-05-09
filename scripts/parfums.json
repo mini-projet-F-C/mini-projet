@@ -1,0 +1,27 @@
+[
+    {
+        "nom" : "Acqua di Gio Profumo",
+        "marque" : "ARMANI",
+        "prix" : "50.25",
+        "img" : "giorgio_armani-acqua_di_gio_homme-profumo.png"
+    },
+    {
+        "nom" : "Acqua di Gioia Eau de Parfum",
+        "marque" : "ARMANI",
+        "prix" : "47.6",
+        "img" : "armani-acqua-di-gioia-eau-de-parfum.png"
+    },
+    {
+        "nom" : "1 MILLION",
+        "marque" : "PACO RABANNE",
+        "prix" : "48.5",
+        "img" : "1_million.png"
+    },
+    {
+        "nom" : "LA PERLA",
+        "marque" : "La MIA Perla",
+        "prix" : "60.0",
+        "img" : "la-mia-perla-eau-de-parfum.png"
+    }
+   
+]

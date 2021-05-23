@@ -5,25 +5,7 @@ const carteTotalValue = document.getElementById('carte-total-value');
 const carteCountInfo = document.getElementById('carte-count-info');
 let carteItemID = 1;
 
-
-
-class parfums {
-    nom: string;
-    marque: string;
-    prix: string;
-    img : string;
-    constructor(nom: string,marque: string,prix: string,img : string) 
-    {
-        this.nom=nom;
-        this.marque=marque;
-        this.prix=prix;
-        this.img=img;
-    }
-}
-
-
 eventListeners();
-
 
 
 function eventListeners(){
@@ -38,9 +20,12 @@ function eventListeners(){
     
     document.getElementById('carte-btn').addEventListener('click', () => {
         carteContainer.classList.toggle('show-carte-container');
-    });   
-}
+    });
 
+   
+
+    
+}
 
 
 function updateCarteInfo(parfums){
@@ -78,7 +63,25 @@ function loadJSON(){
 }
 
 
+function purchaseParfums(e: { target: { classList: { contains: (arg0: string) => any; }; parentElement: { parentElement: any; }; }; }){
+    if(e.target.classList.contains('add-to-carte-btn')){
+        let parfums = e.target.parentElement.parentElement;
+        getParfumsInfo(parfums);
+    }
+}
 
+function getParfumsInfo(parfums: { querySelector: (arg0: string) => { (): any; new(): any; src: any; textContent: any; }; }){
+    let parfumsInfo = {
+        id: carteItemID,
+        img: parfums.querySelector('.parfums-img img').src,
+        nom: parfums.querySelector('.parfums-nom').textContent,
+        marque: parfums.querySelector('.parfums-marque').textContent,
+        prix: parfums.querySelector('.parfums-prix').textContent
+    }
+    carteItemID++;
+    addToCarteList(parfumsInfo);
+    saveparfums(parfumsInfo);
+}
 
 function addToCarteList(parfums: { id: any; img: any; nom: any; marque: any; prix: any; }){
     const carteItem = document.createElement('div');
@@ -98,6 +101,13 @@ function addToCarteList(parfums: { id: any; img: any; nom: any; marque: any; pri
     carteList.appendChild(carteItem);
 }
 
+
+function saveparfums(item: any){
+    let parfums = getparfums();
+    parfums.push(item);
+    localStorage.setItem('parfums', JSON.stringify(parfums));
+    updateCarteInfo(parfums);
+}
 
 
 function getparfums(){
@@ -120,9 +130,37 @@ function loadCarte(){
     updateCarteInfo(parfums);
 }
 
+function findCarteInfo(){
+    let parfums = getparfums();
+    let total = parfums.reduce(( compteur: number, parfums: { prix: string; }) => {
+        let prix = parseFloat(parfums.prix.substr(1)); 
+        return compteur += prix;
+    }, 0); 
 
+    return{
+        total: total.toFixed(2),
+        parfumsCount: parfums.length
+    }
+}
+
+
+function deleteparfums(){
+    let carteItem: { remove: () => void; dataset: { id: string; }; };
+    carteItem.remove(); 
+    
+
+    let parfums = getparfums();
+    let updatedparfums = parfums.filter((parfums: { id: number; }) => {
+        return parfums.id !== parseInt(carteItem.dataset.id);
+    });
+    localStorage.setItem('parfums', JSON.stringify(updatedparfums)); 
+    updateCarteInfo(parfums);
+}
 
 }
+
+
+
 
 
 
